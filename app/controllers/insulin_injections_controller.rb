@@ -3,7 +3,7 @@ class InsulinInjectionsController < ApplicationController
   def create
     @day = Day.find(params[:day_id])
     @day.insulin_injections.create(insulin_injection_params)
-    redirect_to @day
+    redirect_to :back
   end
 
   private

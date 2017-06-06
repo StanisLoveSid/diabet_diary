@@ -3,7 +3,7 @@ class MealsController < ApplicationController
   def create
     @day = Day.find(params[:day_id])
     @day.meals.create(meal_params)
-    redirect_to @day
+    redirect_to :back
   end
 
   private

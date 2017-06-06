@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
-  resources :days do
-    resources :sugar_levels
-    resources :meals
-    resources :exercises
-    resources :warnings
-    resources :insulin_injections
+
+  resources :years do
+    resources :months do
+      resources :days do
+        resources :sugar_levels
+        resources :meals
+        resources :exercises
+        resources :warnings
+        resources :insulin_injections
+      end
+    end
   end
-  root "days#index"
+
+  root "years#index"
 end

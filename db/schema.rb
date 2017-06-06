@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605102843) do
+ActiveRecord::Schema.define(version: 20170606132639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170605102843) do
     t.string   "data"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "month_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -49,6 +50,15 @@ ActiveRecord::Schema.define(version: 20170605102843) do
     t.integer  "day_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "months", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "compensation"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "year_id"
   end
 
   create_table "sugar_levels", force: :cascade do |t|
@@ -83,6 +93,14 @@ ActiveRecord::Schema.define(version: 20170605102843) do
     t.integer  "day_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "years", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "compensation"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

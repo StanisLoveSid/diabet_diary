@@ -1,0 +1,14 @@
+<%= form_for([@year, @month, @month.days.new]) do |f| %>
+<%= f.text_field :created_at %>
+<%= f.submit "submit" %>
+<% end %>
+
+<%= line_chart @total %>
+<%= pie_chart(@status_hash, adapter: "google") %>
+
+<% @month.days.each do |day| %>
+<% if day.id != nil%>
+<%= link_to "#{day.created_at.year}"+"."+"#{day.created_at.month}"+"."+"#{day.created_at.day}", year_month_day_path(@year, @month, day.id) %>
+<% end %>
+<% end %>
+

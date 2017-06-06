@@ -1,16 +1,19 @@
 class DaysController < ApplicationController
-
+ 
   def index
     @days = Day.all
+    @sugar_levels = SugarLevel.by_month(params[:month])
   end
 
   def create
-    @user = current_user
-    current_user.days.create(day_params)
+    @month = Month.find(params[:month_id])
+    @month.days.create(day_params)
     redirect_to :root
   end
 
   def show
+    @year = Year.find(params[:year_id])
+    @month = Month.find(params[:month_id])
     @day = Day.find(params[:id])
     @s_l = @day.sugar_levels.group_by_minute(:created_at).sum(:mmol)
     @result = @s_l.select{|k, v| v != 0}
@@ -38,7 +41,7 @@ class DaysController < ApplicationController
   private
 
   def day_params
-    params.require(:day).permit(:data, :description, :created_at)
+    params.require(:day).permit(:data, :description, :created_at, :month_id)
   end
 
 end

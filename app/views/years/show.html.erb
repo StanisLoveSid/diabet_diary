@@ -1,0 +1,15 @@
+<%= form_for([@year, @year.months.build], method: :post ) do |f| %>
+<%= f.text_field :created_at %>
+<%= f.submit "submit" %>
+<% end %>
+
+<%= area_chart @zoomable %>
+
+<%= pie_chart @status_hash, adapter: "google"%>
+
+<% @year.months.each do |month| %>
+<% if month.id != nil%>
+<%= link_to "#{month.created_at}", year_month_path(@year, month.id) %>
+<% end %>
+<% end %>
+

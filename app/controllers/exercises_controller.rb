@@ -3,7 +3,7 @@ class ExercisesController < ApplicationController
   def create
     @day = Day.find(params[:day_id])
     @day.exercises.create(exercise_params)
-    redirect_to @day
+    redirect_to :back
   end
 
   private

@@ -3,36 +3,37 @@
 
 <%= pie_chart((@day.sugar_levels.group(:status).count), adapter: "google") %>
 
+
 Conclusion: <%= @day.compensated? ? "Compensated" : "Not compensated" %>
 
-<%= form_for([@day, @day.sugar_levels.build], method: :post ) do |f| %>
+<%= form_for([@year, @month, @day, @day.sugar_levels.build], method: :post ) do |f| %>
 <%= f.text_field :mmol %>
 <%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
 <%= f.submit "submit" %>
 <% end %>
 
-<%= form_for([@day, @day.meals.build], method: :post ) do |f| %>
+<%= form_for([@year, @month, @day, @day.meals.build], method: :post ) do |f| %>
 <%= f.text_field :bread_units %>
 <%= f.text_field :description %>
 <%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
 <%= f.submit "submit" %>
 <% end %>
 
-<%= form_for([@day, @day.insulin_injections.build], method: :post ) do |f| %>
+<%= form_for([@year, @month, @day, @day.insulin_injections.build], method: :post ) do |f| %>
 <%= f.text_field :amount %>
 <%= f.text_field :insulin_type %>
 <%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
 <%= f.submit "submit" %>
 <% end %>
 
-<%= form_for([@day, @day.exercises.build], method: :post ) do |f| %>
+<%= form_for([@year, @month, @day, @day.exercises.build], method: :post ) do |f| %>
 <%= f.text_field :status %>
 <%= f.text_field :description %>
 <%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
 <%= f.submit "submit" %>
 <% end %>
 
-<%= form_for([@day, @day.warnings.build], method: :post ) do |f| %>
+<%= form_for([@year, @month, @day, @day.warnings.build], method: :post ) do |f| %>
 <%= f.text_field :reason %>
 <%= f.text_field :description %>
 <%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
@@ -43,15 +44,15 @@ Conclusion: <%= @day.compensated? ? "Compensated" : "Not compensated" %>
 <%= msg %>
 <% end %>
 
-<%= link_to "Delete day", @day, method: :delete %>
+<%= link_to "Delete day", year_month_day_path(@year, @month, @day), method: :delete %>
 
 <% @day.sugar_levels.each do |sugar_level| %>
 <p>
 <%= sugar_level.mmol %>
 <%= sugar_level.created_at %>
 <% if sugar_level.id != nil%>
-<%= link_to "Edit", edit_day_sugar_level_path(@day, sugar_level) %>
-<%= link_to "Delete analysis", day_sugar_level_path(@day, sugar_level), method: :delete %>
+<%= link_to "Edit", edit_year_month_day_sugar_level_path(@year, @month, @day, sugar_level) %>
+<%= link_to "Delete analysis", year_month_day_sugar_level_path(@year, @month, @day, sugar_level), method: :delete %>
 <% end %>
 </p>
 <% end %>

@@ -18,7 +18,7 @@ before_action :set_day, only: [:destroy]
   def create
     @day = Day.find(params[:day_id])
     @day.sugar_levels.create(sugar_level_params)
-    redirect_to @day
+    redirect_to :back
   end
 
   private

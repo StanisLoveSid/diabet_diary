@@ -5,6 +5,7 @@ class Day < ApplicationRecord
   has_many :exercises, dependent: :destroy
   has_many :insulin_injections, dependent: :destroy
   belongs_to :user
+  belongs_to :month
   validates :created_at, uniqueness: true, if: :check_date_uniqueness
 
   def check_date_uniqueness
@@ -19,6 +20,13 @@ class Day < ApplicationRecord
     total = sugar_levels.map {|e| e.status }
     return false if (total.include? "High") || (total.include? "Low")
     true
+  end
+
+  def average
+    amount = sugar_levels.count
+    all_sugar_level = sugar_levels.map(&:mmol)
+    sum = all_sugar_level.inject(0) { |sum, x| sum + x }
+    sum / amount
   end
 
 end
