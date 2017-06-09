@@ -1,14 +1,21 @@
 class DaysController < ApplicationController
- 
+
   def index
     @days = Day.all
     @sugar_levels = SugarLevel.by_month(params[:month])
   end
 
   def create
+    @year = Year.find(params[:year_id])
     @month = Month.find(params[:month_id])
-    @month.days.create(day_params)
-    redirect_to :root
+    data = []
+    @month.days.each { |d| data << d.day_number }
+    unless data.include? day_params[:day_number].to_i
+      @month.days.create(day_params)
+    else
+      flash[:notice] = "Day already exists"
+    end
+    redirect_to :back
   end
 
   def show
@@ -29,19 +36,21 @@ class DaysController < ApplicationController
 
     @warning_start = @day.warnings.where("reason = ?", "start").group_by_minute(:created_at).sum(15)
     @warning_end = @day.warnings.where("reason = ?", "end").group_by_minute(:created_at).sum(15)
-    
+
   end
 
   def destroy
     @day = Day.find(params[:id])
+    @year = Year.find(params[:year_id])
+    @month = Month.find(params[:month_id])
     @day.destroy
-    redirect_to :root
+    redirect_to year_month_path(@year, @month)
   end
 
   private
 
   def day_params
-    params.require(:day).permit(:data, :description, :created_at, :month_id)
+    params.require(:day).permit(:data, :description, :day_number, :month_id)
   end
 
 end

@@ -1,5 +1,5 @@
-<%= form_for current_user.years.new do |f| %>
-<%= f.text_field :created_at %>
+<%= simple_form_for current_user.years.new do |f| %>
+<%= f.input :year_number, collection: @year_collection %>
 <%= f.submit "submit" %>
 <% end %>
 

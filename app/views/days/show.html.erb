@@ -6,39 +6,87 @@
 
 Conclusion: <%= @day.compensated? ? "Compensated" : "Not compensated" %>
 
+<div class="row">
+<div class="col-sm-2">
+Sugar Level
 <%= form_for([@year, @month, @day, @day.sugar_levels.build], method: :post ) do |f| %>
-<%= f.text_field :mmol %>
-<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
-<%= f.submit "submit" %>
-<% end %>
 
+<p>
+<%= f.label :mmol %> 
+<%= f.text_field :mmol %></p>
+<p> 
+<%= f.label :created_at %>
+<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%></p>
+<p> <%= f.submit "submit" %> </p>
+<% end %>
+</div>
+
+
+
+<div class="col-sm-2">
+Meal
 <%= form_for([@year, @month, @day, @day.meals.build], method: :post ) do |f| %>
-<%= f.text_field :bread_units %>
-<%= f.text_field :description %>
-<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
-<%= f.submit "submit" %>
+<p>
+<%= f.label :bread_units %>
+<%= f.text_field :bread_units %></p>
+<p>
+<%= f.label :description %>
+<%= f.text_field :description %></p>
+<p>
+<%= f.label :created_at %>
+<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%></p>
+<p><%= f.submit "submit" %></p>
 <% end %>
+</div>
 
+<div class="col-sm-2">
+Insulin injection
 <%= form_for([@year, @month, @day, @day.insulin_injections.build], method: :post ) do |f| %>
-<%= f.text_field :amount %>
-<%= f.text_field :insulin_type %>
-<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
-<%= f.submit "submit" %>
+<p>
+<%= f.label :amount %>
+<%= f.text_field :amount %></p>
+<p>
+<%= f.label :insulin_type %>
+<%= f.text_field :insulin_type %></p>
+<p>
+<%= f.label :created_at %>
+<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%></p>
+<p><%= f.submit "submit" %></p>
 <% end %>
+</div>
 
+<div class="col-sm-2">
+Exercise
 <%= form_for([@year, @month, @day, @day.exercises.build], method: :post ) do |f| %>
-<%= f.text_field :status %>
-<%= f.text_field :description %>
-<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
-<%= f.submit "submit" %>
+<p>
+<%= f.label :status %>
+<%= f.text_field :status %></p>
+<p>
+<%= f.label :description %>
+<%= f.text_field :description %></p>
+<p>
+<%= f.label :created_at %>
+<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%></p>
+<p><%= f.submit "submit" %></p>
 <% end %>
+</div>
 
+<div class="col-sm-2">
+Warning
 <%= form_for([@year, @month, @day, @day.warnings.build], method: :post ) do |f| %>
-<%= f.text_field :reason %>
-<%= f.text_field :description %>
-<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%>
-<%= f.submit "submit" %>
-<% end %>     
+<p>
+<%= f.label :reason %>
+<%= f.text_field :reason %></p>
+<p>
+<%= f.label :description %>
+<%= f.text_field :description %></p>
+<p>
+<%= f.label :created_at %>
+<%= f.text_field :created_at, value: "#{@day.created_at.year}"+"-"+"#{@day.created_at.month}"+"-"+"#{@day.created_at.day} "%></p>
+<p><%= f.submit "submit" %></p>
+<% end %>  
+</div>
+</div>   
 
 <% @day.errors.full_messages.each do |msg| %>
 <%= msg %>

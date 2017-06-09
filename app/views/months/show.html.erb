@@ -1,10 +1,12 @@
-<%= form_for([@year, @month, @month.days.new]) do |f| %>
-<%= f.text_field :created_at %>
+<%= simple_form_for([@year, @month, @month.days.new]) do |f| %>
+<%= f.input :day_number, collection: @days_collection %>
 <%= f.submit "submit" %>
 <% end %>
 
 <%= line_chart @total %>
 <%= pie_chart(@status_hash, adapter: "google") %>
+
+<%= link_to "Delete month", year_month_path(@year, @month), method: :delete %>
 
 <% @month.days.each do |day| %>
 <% if day.id != nil%>
