@@ -4,6 +4,7 @@ class Day < ApplicationRecord
   has_many :warnings, dependent: :destroy
   has_many :exercises, dependent: :destroy
   has_many :insulin_injections, dependent: :destroy
+  has_many :comments, as: :commentable
   belongs_to :user
   belongs_to :month
   before_save :change_created_at

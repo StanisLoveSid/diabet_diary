@@ -2,6 +2,7 @@ class Month < ApplicationRecord
   belongs_to :user
   belongs_to :year
   has_many :days, dependent: :destroy
+  has_many :comments, as: :commentable
   before_save :change_created_at
 
   def change_created_at

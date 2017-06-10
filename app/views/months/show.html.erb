@@ -14,3 +14,12 @@
 <% end %>
 <% end %>
 
+
+<%= render partial: "comments/comments", locals: {commentable: @month} %>
+<%= form_for [@year, @month, Comment.new] do |f| %>
+<div class="form-group">
+	<%= f.text_field :status, class: "form-control" %>
+	<%= f.text_area :content, class: "form-control" %>
+	<%= f.submit "Add comment" %>
+</div>
+<% end %>
