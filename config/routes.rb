@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   resources :users
 
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get "/users/add_patient/:id", to: "users#add_patient"
+  get "/users/accept_request/:id", to: "users#accept_request"
 
   root "years#index"
 end

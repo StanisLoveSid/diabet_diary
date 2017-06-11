@@ -4,11 +4,6 @@
 <%= area_chart @result, utc: true %>
 
 
-<%= form_for current_user.sugar_levels.new do |f| %>
-<%= f.text_field :mmol %>
-<%= f.submit "submit" %>
-<% end %>
-
 <script>
 Highcharts.chart('container', {
     chart: {
