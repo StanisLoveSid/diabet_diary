@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611200748) do
+ActiveRecord::Schema.define(version: 20170614193916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,21 @@ ActiveRecord::Schema.define(version: 20170611200748) do
     t.datetime "updated_at"
     t.integer  "blocker_id"
     t.integer  "status"
+  end
+
+  create_table "hospitals", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "avatar"
+    t.integer  "rate"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+  end
+
+  create_table "hospitals_users", id: false, force: :cascade do |t|
+    t.integer "hospital_id"
+    t.integer "user_id"
   end
 
   create_table "insulin_injections", force: :cascade do |t|
@@ -105,6 +120,8 @@ ActiveRecord::Schema.define(version: 20170611200748) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "role"
+    t.integer  "hospital_id"
+    t.string   "aasm_state"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def index
     @sugar_levels = SugarLevel.all
     @creation_time = @sugar_levels.select(:created_at).map(&:created_at).map(&:hour)
@@ -9,19 +10,25 @@ class UsersController < ApplicationController
   end
 
   def add_patient
-  	current_user.friend_request(User.find(params[:id]))
-  	flash[:notice] = "Request has been sent"
-  	redirect_to :back
+    (User.find(params[:id])).friend_request current_user
+    flash[:notice] = "Request has been sent"
+    redirect_to :back
   end
 
   def accept_request
-    current_user.accept_request(User.find(params[:user_id]))
-  	flash[:notice] = "Request has been accepted"
-  	redirect_to :back	
+    (User.find(params[:user_id])).accept_request current_user
+    flash[:notice] = "Request has been accepted"
+    redirect_to :back
+  end
+
+  def personal_page
+    @requested_hospitals = Hospital.all.select{|h| h.users.select{|user| user.id == current_user.id}}.map do |hospital|
+      [hospital.name, hospital.id]
+    end
   end
 
   def show
-  	@user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
 end

@@ -37,6 +37,7 @@ gem 'owlcarousel-rails'
 gem 'domp'
 gem 'fog-aws'
 gem 'ffaker'
+gem 'aasm'
 # gem 'active_median'
 # gem 'lazy_high_charts'
 gem "highcharts-rails"
